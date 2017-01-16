@@ -78,20 +78,47 @@ Module.register("MMM-MovieInfo",{
 			if (this.index >= this.upcoming.results.length) {
 				this.index = 0;
 			}
+
 			wrapper.classList.add("wrapper", "align-left");
+			
+			var header = document.createElement("header");
+			header.classList.add("module-header");
+			header.innerHTML = "Upcoming movie: " + this.upcoming.results[this.index].title;
+			wrapper.appendChild(header);
+			
+			var metadata = document.createElement("div");
 
-            var title = document.createElement("div");
-			title.classList.add("bright", "small");
-			title.innerHTML = this.upcoming.results[this.index].title;
-			wrapper.appendChild(title);
+			var movieimage = document.createElement("div");
+			movieimage.classList.add("float-left","movieimage");
+			
+			var movieimageholder = document.createElement("div");
+			movieimageholder.classList.add("movieimageholder");
 
-            var poster = document.createElement("img");
+			var poster = document.createElement("img");
 			poster.classList.add("poster");
 			poster.src = "https://image.tmdb.org/t/p/w185_and_h278_bestv2" + this.upcoming.results[this.index].poster_path;
-			wrapper.appendChild(poster);
+			movieimageholder.appendChild(poster);
 
-            if(this.config.genre){
+			movieimage.appendChild(movieimageholder);				
+
+			metadata.appendChild(movieimage);			
+
+
+			var details = document.createElement("div");
+			details.classList.add("float-left","moviedetails");
+
+			
+			if(this.config.plot) {
+				var plot = document.createElement("div");
+				plot.classList.add("xsmall", "plot");
+				plot.innerHTML = this.upcoming.results[this.index].overview.length > 250 ? this.upcoming.results[this.index].overview.substring(0, 248) + '...' : this.upcoming.results[this.index].overview;
+				details.appendChild(plot);
+			}
+
+			
+			if(this.config.genre){
 				var genres = document.createElement("div");
+				genres.classList.add("xsmall");
 				var genrespan = document.createElement("span");
 				genrespan.classList.add("xsmall", "float-left");
 				genrespan.innerHTML = this.translate("GENRES") + ": ";
@@ -105,10 +132,10 @@ Module.register("MMM-MovieInfo",{
 						genres.appendChild(genre);
 					}
 				}
-				wrapper.appendChild(genres);
+				details.appendChild(genres);
 			}
-
-            if(this.config.rating) {
+			
+			if(this.config.rating) {
 				var stars = document.createElement("div");
 				stars.classList.add("xsmall");
 				var star = document.createElement("i");
@@ -117,16 +144,13 @@ Module.register("MMM-MovieInfo",{
 				var starspan = document.createElement("span");
 				starspan.innerHTML = " " + this.upcoming.results[this.index].vote_average;
 				stars.appendChild(starspan);
-				wrapper.appendChild(stars);
+				details.appendChild(stars);
 			}
 
-            if(this.config.plot) {
-				var plot = document.createElement("div");
-				plot.classList.add("xsmall", "plot");
-				plot.innerHTML = this.upcoming.results[this.index].overview.length > 250 ? this.upcoming.results[this.index].overview.substring(0, 248) + '...' : this.upcoming.results[this.index].overview;
-				wrapper.appendChild(plot);
-			}
+			metadata.appendChild(details);
+			wrapper.appendChild(metadata);
 		}
+                
 		return wrapper;
 	}
 });

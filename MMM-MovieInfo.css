@@ -1,13 +1,13 @@
 .MMM-MovieInfo .wrapper{
-    width:185px;
     display: flex;
     align-content: center;
     flex-direction: column;
 }
-
-.MMM-MovieInfo .poster {
-    -webkit-filter: grayscale(100%);
-    margin-bottom: 5px;
+.left .MMM-MovieInfo .wrapper{
+    width:340px;
+}
+.right .MMM-MovieInfo .wrapper{
+    width:240px;
 }
 
 .MMM-MovieInfo .badge {
@@ -18,11 +18,29 @@
     margin: 2px;
 }
 
-.MMM-MovieInfo .float-left {
-    float: left;
+.MMM-MovieInfo .movietitle {
+   width:100%;
+}
+.MMM-MovieInfo .movieimage {
+   float: left;
+   width:24%;
+   margin-right:3%;
+}
+.MMM-MovieInfo .moviedetails {
+   float: left;
+   width:66%;
+   margin-left:1%;
 }
 
 .MMM-MovieInfo .plot {
-    width: 185px;
     word-wrap: break-word;
+    margin-bottom: 5px;
+}
+
+.MMM-MovieInfo .movieimageholder img {
+	border: 1px solid #fff;
+	 -webkit-box-shadow: 1px 1px 1px #777;
+	 -moz-box-shadow: 1px 1px 1px #777;
+	  box-shadow: 1px 1px 1px #777;
+        width:99%;
 }
